@@ -140,6 +140,9 @@
             text-align: right;
             min-width: 50px; /* Ensure the number has enough space */
         }
+        .gold-score {
+            color: #D4AF37;
+        }
     </style>
 </head>
 <body onload="document.getElementById('numberCount').value = '40'; generateGrid();">
@@ -240,6 +243,19 @@
             ]
         };
 
+        // Seuils des scores dorés
+        const goldScores = {
+            "10": 9,
+            "20": 17,
+            "25": 21,
+            "30": 26,
+            "40": 32,
+            "50": 41,
+            "60": 49,
+            "80": 64,
+            "100": 77
+        };
+
         function toggleModal() {
             const modal = document.getElementById("rankingModal");
             const count = document.getElementById("numberCount").value;
@@ -253,6 +269,13 @@
                     rankings[count].forEach(entry => {
                         let li = document.createElement("li");
                         li.innerHTML = entry;  // Use innerHTML to include <span> for numbers
+                        const scoreMatch = entry.match(/<span>(\d+)<\/span>/);
+                        if (scoreMatch) {
+                            const score = parseInt(scoreMatch[1], 10);
+                            if (score >= goldScores[count]) {
+                                li.style.color = "#D4AF37";
+                            }
+                        }
                         rankingList.appendChild(li);
                     });
                 } else {
@@ -361,8 +384,18 @@
                 if (lastSelectedCell) {
                     lastSelectedCell.classList.add("selected");
                 }
+                // Afficher le score final
+                const finalScore = selectedNumbersList.length;
+                const count = document.getElementById("numberCount").value;
+                const goldScore = goldScores[count];
+                
                 setTimeout(() => {
-                    alert("Partie terminée ! Aucun choix possible.");
+                    if (finalScore >= goldScore) {
+                        alert(`Félicitations ! Vous avez trouver une séquence de longueur ${finalScore}, la longueur maximale possible !`);
+                    } else {
+                        alert(`Longueur de votre séquence : ${finalScore}
+                            Longeur maximale possible : ${goldScore}`);
+                    }
                 }, 200);
             }
         }
