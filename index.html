@@ -122,7 +122,7 @@
             padding-bottom: 5px;
             border-radius: 10px;
             z-index: 1000;
-            width: 250px;
+            width: 300px;
             text-align: left;
         }
         .modal ul {
@@ -185,23 +185,43 @@
     <script>
         const rankings = {
             "100": [
+                "<span>Classement 6èmes</span>",
                 "1. Juliette (6e1) <span>31</span>",
                 "2. Louna (6e1) <span>30</span>",
                 "3. Louna & Océane (6e1) <span>29</span>",
                 "4. Lucas C. (6e5) <span>27</span>",
-                "5. Inès (6e1) <span>15</span>"
+                "5. Inès (6e1) <span>15</span>",
+                "   ",
+                "   ",
+                "<span>Classement 4èmes</span>"
+            ],
+            "80": [
+                "<span>Classement 6èmes</span>",
+                "   ",
+                "   ",
+                "<span>Classement 4èmes</span>",
+                "1. Antoine & Maxime B. (4e7) <span>31</span>"
             ],
             "60": [
-                "1. Océane (6e1) <span>27</span>"
+                "<span>Classement 6èmes</span>",
+                "1. Océane (6e1) <span>27</span>",
+                "   ",
+                "   ",
+                "<span>Classement 4èmes</span>"
             ],
             "50": [
+                "<span>Classement 6èmes</span>",
                 "1. Arthur (6e7) <span>41</span>",
                 "2. Naelle (6e1) <span>23</span>",
                 "3. Océane (6e1) <span>21</span>",
                 "3. Inès (6e5) <span>21</span>",
-                "3. Juliette (6e1) <span>21</span>"
+                "3. Juliette (6e1) <span>21</span>",
+                "   ",
+                "   ",
+                "<span>Classement 4èmes</span>"
             ],
             "40": [
+                "<span>Classement 6èmes</span>",
                 "1. Arthur (6e7) <span>32</span>",
                 "2. Chloé (6e7) <span>30</span>",
                 "2. Baptiste (6e7) <span>30</span>",
@@ -210,41 +230,73 @@
                 "6. Suzanne & Lola (6e1) <span>27</span>",
                 "6. Nina & Léandre (6e5) <span>27</span>",
                 "8. Louane & Lola R. (6e7) <span>26</span>",
-                "9. Evan & Samuel (6e1) <span>25</span>"
+                "9. Evan & Samuel (6e1) <span>25</span>",
+                "   ",
+                "   ",
+                "<span>Classement 4èmes</span>",
+                "1. Jules & Esteban (4e7) <span>11</span>"
             ],
             "30": [
+                "<span>Classement 6èmes</span>",
                 "1. Dorine & Axelle (6e7) <span>26</span>",
                 "1. Adèle (6e1) <span>26</span>",
                 "1. Arthur (6e7) <span>26</span>",
-                "4. Dorine & Axelle (6e7) <span>25</span>",
-                "5. Kim (6e7) <span>24</span>",
-                "6. Suzanne & Lola (6e1) <span>23</span>",
-                "7. Aton (6e5) <span>23</span>",
-                "7. Guillaume & Mehdi (6e5) <span>23</span>",
-                "9. Lola M. & Liliana (6e7) <span>22</span>",
-                "9. Ambre & Adèle (6e1) <span>22</span>",
-                "9. Gabriel (6e1) <span>22</span>"
+                "4. Kim (6e7) <span>24</span>",
+                "5. Suzanne & Lola (6e1) <span>23</span>",
+                "6. Aton (6e5) <span>23</span>",
+                "6. Guillaume & Mehdi (6e5) <span>23</span>",
+                "8. Lola M. & Liliana (6e7) <span>22</span>",
+                "8. Ambre & Adèle (6e1) <span>22</span>",
+                "8. Gabriel (6e1) <span>22</span>",
+                "   ",
+                "   ",
+                "<span>Classement 4èmes</span>",
+                "1. Jane (4e6) <span>22</span>",
+                "2. Aurel, Baptiste & Maxime C. (4e7) <span>21</span>",
+                "3. Noémie & Manon M. (4e7) <span>18</span>"
             ],
             "25": [
+                "<span>Classement 6èmes</span>",
                 "1. Arthur (6e7) <span>21</span>",
                 "2. Suzanne (6e1) <span>16</span>",
                 "3. Océane & Louna (6e1) <span>15</span>",
-                "4. Juliette (6e1) <span>14</span>"
+                "4. Juliette (6e1) <span>14</span>",
+                "   ",
+                "   ",
+                "<span>Classement 4èmes</span>",
+                "1. Lola & Clara F. (4e7) <span>21</span>"
             ],
             "20": [
+                "<span>Classement 6èmes</span>",
                 "1. Arthur (6e7) <span>17</span>",
                 "2. Juliette (6e1) <span>16</span>",
                 "2. Lucas C. (6e5) <span>16</span>",
-                "4. Océane (6e1) <span>14</span>"
+                "4. Océane (6e1) <span>14</span>",
+                "   ",
+                "   ",
+                "<span>Classement 4èmes</span>",
+                "1. Lola & Clara F. (4e7) <span>17</span>",
+                "2. Noémie & Manon M. (4e7) <span>14</span>",
+                "3. Lisa & Clara V. (4e7) <span>12</span>"
             ],
             "10": [
+                "<span>Classement 6èmes</span>",
                 "1. Benjamin (6e5) <span>9</span>",
                 "1. Suzanne (6e1) <span>9</span>",
                 "1. Dorine & Axelle (6e7) <span>9</span>",
                 "1. Juliette (6e1) <span>9</span>",
                 "1. Arthur (6e7) <span>9</span>",
                 "6. Océane (6e1) <span>8</span>",
-                "7. Issam (6e7) <span>7</span>"
+                "7. Issam (6e7) <span>7</span>",
+                "   ",
+                "   ",
+                "<span>Classement 4èmes</span>",
+                "1. Lola & Clara F. (4e7) <span>9</span>",
+                "1. Fares & Loan (4e7) <span>9</span>",
+                "1. Lisa & Clara V. (4e7) <span>9</span>",
+                "1. Noémie & Manon M. (4e7) <span>9</span>",
+                "1. Emma & Eulalie (4e7) <span>9</span>",
+                "1. Jules & Esteban (4e7) <span>9</span>"
             ]
         };
 
