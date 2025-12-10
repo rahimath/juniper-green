@@ -33,7 +33,7 @@
             border-radius: 10px;
             cursor: pointer;
             color: white;
-            font-weight: bold;
+            font-weight: 500;
             transition: background-color 0.2s ease, color 0.2s ease;
             height: 60px;
             width: 60px;
@@ -63,11 +63,16 @@
         .selected-numbers {
             position: absolute;
             bottom: 70px;
-            width: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
             text-align: center;
             font-size: 24px;
             font-weight: normal;
             display: none;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            line-height: 1.8;
         }
         .controls {
             position: absolute;
@@ -96,6 +101,21 @@
         }
         .control-btn:hover svg path {
             stroke: gray;
+        }
+        .counter {
+            color: white;
+            font-size: 24px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            margin-right: 18px;
+            margin-bottom: 5px;
+            transition: text-shadow 0.4s ease;
+        }
+        .counter.glow {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                         0 0 20px rgba(255, 255, 255, 0.6),
+                         0 0 30px rgba(255, 255, 255, 0.4);
         }
         .menu {
             position: absolute;
@@ -138,14 +158,160 @@
             font-weight: bold;
             margin-left: 10px;
             text-align: right;
-            min-width: 50px; /* Ensure the number has enough space */
+            min-width: 50px;
         }
         .gold-score {
             color: #D4AF37;
         }
+        .game-over-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #171717;
+            padding: 40px 60px;
+            border-radius: 20px;
+            z-index: 2000;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            overflow: visible;
+        }
+        .game-over-modal h2 {
+            margin: 0 0 20px 0;
+            font-size: 32px;
+            color: white;
+        }
+        .game-over-modal p {
+            margin: 10px 0;
+            font-size: 20px;
+            color: #ccc;
+        }
+        .game-over-modal .score {
+            font-size: 48px;
+            font-weight: 600;
+            margin: 20px 0;
+            transition: text-shadow 1s ease;
+        }
+        .game-over-modal .score.glow {
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
+                         0 0 30px rgba(255, 255, 255, 0.6),
+                         0 0 45px rgba(255, 255, 255, 0.4);
+        }
+        .game-over-modal .gold {
+            color: #D4AF37;
+        }
+        .game-over-modal .gold.glow {
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.9),
+                         0 0 30px rgba(212, 175, 55, 0.7),
+                         0 0 45px rgba(212, 175, 55, 0.5);
+        }
+        .game-over-modal .sequence-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .game-over-modal .sequence-container {
+            background: #222;
+            border-radius: 10px;
+            padding: 5px 15px;
+            height: 30px;
+            min-width: 350px;
+            max-width: 550px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            position: relative;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            flex-shrink: 1;
+        }
+        .game-over-modal .sequence-text {
+            font-size: 16px;
+            color: #ccc;
+            display: inline-block;
+            line-height: 30px;
+        }
+        .game-over-modal .copy-icon-btn {
+            background: none;
+            border: none;
+            padding: 5px;
+            margin: 7.5px 10px 7.5px 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+            height: 30px;
+        }
+        .game-over-modal .copy-icon-btn:hover {
+            opacity: 1;
+        }
+        .game-over-modal .copy-icon-btn:hover::after {
+            content: "Copier";
+            position: fixed;
+            background: #080808;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 2001;
+            pointer-events: none;
+            margin-top: 70px;
+        }
+        .game-over-modal .copy-icon-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: white;
+            fill: none;
+        }
+        .game-over-modal .copy-btn {
+            margin-top: 10px;
+            padding: 8px 20px;
+            font-size: 14px;
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .game-over-modal .copy-btn:hover {
+            background-color: #555;
+        }
+        .game-over-modal button {
+            margin-top: 30px;
+            margin: 15px 10px 0 10px;
+            padding: 11px 30px;
+            font-size: 18px;
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .game-over-modal button:hover {
+            background-color: #222;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1999;
+        }
     </style>
 </head>
-<body onload="document.getElementById('numberCount').value = '40'; generateGrid();">
+<body onload="document.getElementById('numberCount').value = '30'; generateGrid();">
     <div class="menu">
         <button class="menu-btn" onclick="toggleModal()">Classement</button>
     </div>
@@ -158,8 +324,8 @@
         <option value="10">10</option>
         <option value="20">20</option>
         <option value="25">25</option>
-        <option value="30">30</option>
-        <option value="40" selected>40</option>
+        <option value="30" selected>30</option>
+        <option value="40">40</option>
         <option value="50">50</option>
         <option value="60">60</option>
         <option value="80">80</option>
@@ -167,6 +333,7 @@
     </select>
 
     <div class="controls">
+        <div class="counter" id="counter">0</div>
         <button class="control-btn" onclick="undoLastMove()">
             <svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none">
             <path d="M7 11L3 15M3 15L7 19M3 15H16C18.7614 15 21 12.7614 21 10C21 7.23858 18.7614 5 16 5H11" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -181,161 +348,103 @@
 
     <div class="grid" id="grid"></div>
     <div class="selected-numbers" id="selectedNumbers"></div>
+    
+    <div class="overlay" id="overlay"></div>
+    <div class="game-over-modal" id="gameOverModal">
+        <h2 id="modalTitle">Partie terminée !</h2>
+        <p id="modalMessage"></p>
+        <div class="score" id="modalScore"></div>
+        <div class="sequence-wrapper">
+            <div class="sequence-container">
+                <div class="sequence-text" id="modalSequence"></div>
+            </div>
+            <button class="copy-icon-btn" onclick="copySequence()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+            </button>
+        </div>
+        <div>
+            <button onclick="closeModalContinue()">Continuer</button>
+            <button onclick="closeModalRestart()">Recommencer</button>
+        </div>
+    </div>
 
     <script>
         const rankings = {
             "100": [
-                "<span>Classement 6èmes</span>",
-                "1. Arthur (6e7) <span>77</span>",
-                "2. Tristan (6e5) <span>37</span>",
-                "3. Inès (6e1) <span>33</span>",
-                "4. Juliette (6e1) <span>31</span>",
-                "5. Louna (6e1) <span>30</span>",
-                "6. Louna & Océane (6e1) <span>29</span>",
-                "7. Lucas C. (6e5) <span>27</span>",
-                "   ",
-                "   ",
-                "<span>Classement 4èmes</span>",
-                "1. Maxime B. (4e7) <span>20</span>"
+                "<span>Classement 5èmes</span>"
             ],
             "80": [
-                "<span>Classement 6èmes</span>",
-                "1. Arthur (6e7) <span>64</span>",
-                "2. Suzanne & Lola (6e1) <span>37</span>",
-                "3. Louis (6e1) <span>26</span>",
-                "4. Suzanne (6e1) <span>25</span>",
-                "5. Ambre (6e1) <span>23</span>",
-                "5. Inès (6e1) <span>23</span>",
-                "   ",
-                "   ",
-                "<span>Classement 4èmes</span>",
-                "1. Antoine & Maxime B. (4e7) <span>31</span>"
+                "<span>Classement 5èmes</span>"
             ],
             "60": [
-                "<span>Classement 6èmes</span>",
-                "1. Dorine (6e7) <span>49</span>",
-                "1. Arthur (6e7) <span>49</span>",
-                "3. Lola (6e1) <span>39</span>",
-                "4. Naelle (6e1) <span>28</span>",
-                "5. Océane (6e1) <span>27</span>",
-                "6. Ambre (6e1) <span>24</span>",
-                "6. Inès (6e1) <span>24</span>",
-                "   ",
-                "   ",
-                "<span>Classement 4èmes</span>"
+                "<span>Classement 5èmes</span>"
             ],
             "50": [
-                "<span>Classement 6èmes</span>",
-                "1. Arthur (6e7) <span>41</span>",
-                "2. Naelle (6e1) <span>23</span>",
-                "3. Océane (6e1) <span>21</span>",
-                "3. Inès (6e5) <span>21</span>",
-                "3. Juliette (6e1) <span>21</span>",
-                "   ",
-                "   ",
-                "<span>Classement 4èmes</span>"
+                "<span>Classement 5èmes</span>"
             ],
             "40": [
-                "<span>Classement 6èmes</span>",
-                "1. Arthur (6e7) <span>32</span>",
-                "1. Dorine (6e7) <span>32</span>",
-                "3. Chloé (6e7) <span>30</span>",
-                "3. Baptiste (6e7) <span>30</span>",
-                "5. Evan & Lilah (6e5) <span>29</span>",
-                "6. Benjamin (6e5) <span>28</span>",
-                "7. Suzanne & Lola (6e1) <span>27</span>",
-                "7. Nina & Léandre (6e5) <span>27</span>",
-                "9. Louane & Lola R. (6e7) <span>26</span>",
-                "10. Evan & Samuel (6e1) <span>25</span>",
-                "   ",
-                "   ",
-                "<span>Classement 4èmes</span>",
-                "1. Jules & Esteban (4e7) <span>11</span>"
+                "<span>Classement 5èmes</span>"
             ],
             "30": [
-                "<span>Classement 6èmes</span>",
-                "1. Dorine & Axelle (6e7) <span>26</span>",
-                "1. Adèle (6e1) <span>26</span>",
-                "1. Arthur (6e7) <span>26</span>",
-                "4. Kim (6e7) <span>24</span>",
-                "5. Suzanne & Lola (6e1) <span>23</span>",
-                "5. Aton (6e5) <span>23</span>",
-                "5. Guillaume & Mehdi (6e5) <span>23</span>",
-                "8. Liliana & Lola M. (6e7) <span>22</span>",
-                "8. Ambre & Adèle (6e1) <span>22</span>",
-                "8. Gabriel (6e1) <span>22</span>",
-                "   ",
-                "   ",
-                "<span>Classement 4èmes</span>",
-                "1. Clara V. (4e7) <span>25</span>",
-                "2. Jane (4e6) <span>22</span>",
-                "3. Aurel, Baptiste & Maxime C. (4e7) <span>21</span>",
-                "4. Noémie & Manon M. (4e7) <span>18</span>"
+                "<span>Classement 5èmes</span>",
+                "1. Louméo & Thomas (5D) <span>23</span>",
+                "2. Naelle (5B) <span>22</span>",
+                "3. Jérémy (5E) <span>21</span>",
+                "4. Maeva (5e5) <span>20</span>",
+                "4. Jarod (5F) & Cristian (5d) <span>20</span>",
+                "6. Noham (5F) <span>19</span>",
+                "6. Mathis (5D) <span>19</span>",
+                "8. Kahina (5B) <span>18</span>",
+                "8. Yahya (5B) <span>18</span>",
+                "10. Madjid (5B) <span>16</span>"
             ],
             "25": [
-                "<span>Classement 6èmes</span>",
-                "1. Arthur (6e7) <span>21</span>",
-                "1. Dorine (6e7) <span>21</span>",
-                "3. Suzanne (6e1) <span>16</span>",
-                "4. Océane & Louna (6e1) <span>15</span>",
-                "5. Juliette (6e1) <span>14</span>",
-                "   ",
-                "   ",
-                "<span>Classement 4èmes</span>",
-                "1. Lola & Clara F. (4e7) <span>21</span>",
-                "1. Clara V. (4e7) <span>21</span>"
+                "<span>Classement 5èmes</span>"
             ],
             "20": [
-                "<span>Classement 6èmes</span>",
-                "1. Arthur (6e7) <span>17</span>",
-                "1. Dorine (6e7) <span>17</span>",
-                "1. Suzanne (6e1) <span>17</span>",
-                "4. Juliette (6e1) <span>16</span>",
-                "4. Lucas C. (6e5) <span>16</span>",
-                "4. Baptiste (6e1) <span>16</span>",
-                "4. Tristan (6e5) <span>16</span>",
-                "8. Chloé (6e7) <span>15</span>",
-                "9. Léna (6e1) <span>14</span>",
-                "9. Océane (6e1) <span>14</span>",
-                "   ",
-                "   ",
-                "<span>Classement 4èmes</span>",
-                "1. Lola & Clara F. (4e7) <span>17</span>",
-                "1. Clara V. (4e7) <span>17</span>",
-                "3. Noémie & Manon M. (4e7) <span>14</span>",
-                "4. Lisa & Clara V. (4e7) <span>12</span>",
-                "4. Maxime B. (4e7) <span>12</span>"
+                "<span>Classement 5èmes</span>",
+                "1. Lily-Rose (5E) <span>16</span>",
+                "2. Ayyoub (5e5) <span>16</span>",
+                "2. Manon & Ange-Emmanuella (5e5) <span>16</span>",
+                "2. Issa (5e5) <span>16</span>",
+                "2. Noa (5e5) <span>16</span>",
+                "2. Jahid (5e5) <span>16</span>",
+                "2. Maëllys & Elena (5E) <span>16</span>",
+                "2. Roudaina (5B) <span>16</span>",
+                "2. Neema (5A) <span>16</span>",
+                "10. Elios (5F) <span>13</span>",
+                "10. Kahina (5B) <span>13</span>",
+                "10. Yahya (5B) <span>13</span>",
+                "13. Madhi (5E) <span>12</span>"
             ],
             "10": [
-                "<span>Classement 6èmes</span>",
-                "1. Suzanne (6e1) <span>9</span>",
-                "1. Benjamin (6e5) <span>9</span>",
-                "1. Dorine & Axelle (6e7) <span>9</span>",
-                "1. Juliette (6e1) <span>9</span>",
-                "1. Arthur (6e7) <span>9</span>",
-                "1. Lucas C. (6e5) <span>9</span>",
-                "1. Chloé (6e7) <span>9</span>",
-                "1. Léna (6e1) <span>9</span>",
-                "1. Océane (6e1) <span>9</span>",
-                "1. Baptiste (6e1) <span>9</span>",
-                "1. Lola (6e1) <span>9</span>",
-                "1. Tristan (6e5) <span>9</span>",
-                "13. Inès (6e1) <span>8</span>",
-                "13. Gabriel M. (6e7) <span>8</span>",
-                "15. Issam (6e7) <span>7</span>",
-                "   ",
-                "   ",
-                "<span>Classement 4èmes</span>",
-                "1. Lola & Clara F. (4e7) <span>9</span>",
-                "1. Fares & Loan (4e7) <span>9</span>",
-                "1. Lisa & Clara V. (4e7) <span>9</span>",
-                "1. Noémie & Manon M. (4e7) <span>9</span>",
-                "1. Emma & Eulalie (4e7) <span>9</span>",
-                "1. Jules & Esteban (4e7) <span>9</span>"
+                "<span>Classement 5èmes</span>",
+                "1. Yohan & Djilali (5e5) <span>9</span>",
+                "1. Ayyoub (5e5) <span>9</span>",
+                "1. Issa (5e5) <span>9</span>",
+                "1. Noa (5e5) <span>9</span>",
+                "1. Jahid (5e5) <span>9</span>",
+                "1. Jérémy (5E) <span>9</span>",
+                "1. Madhi (5E) <span>9</span>",
+                "1. Jarod (5F) & Cristian (5D) <span>9</span>",
+                "1. Meyssa (5D) & Ines (5E) <span>9</span>",
+                "1. Jayram (5F) <span>9</span>",
+                "1. Mathis (5D) & Elios (5F) <span>9</span>",
+                "1. Soumaya (5F) & Mélina (5E) <span>9</span>",
+                "1. Roudaina (5B) <span>9</span>",
+                "1. Naelle (5B) <span>9</span>",
+                "1. Kahina (5B) <span>9</span>",
+                "1. Neema (5A) <span>9</span>",
+                "1. Yahya (5B) <span>9</span>",
+                "1. Maya (5B) <span>9</span>",
+                "1. Mehdi (5A) <span>9</span>",
+                "1. Léo (5A) <span>9</span>"
             ]
         };
 
-        // Seuils des scores dorés
         const goldScores = {
             "10": 9,
             "20": 17,
@@ -347,6 +456,45 @@
             "80": 64,
             "100": 77
         };
+
+        const grid = document.getElementById("grid");
+        const selectedNumbersDisplay = document.getElementById("selectedNumbers");
+        const counter = document.getElementById("counter");
+        let selectedNumber = null;
+        let availableNumbers = new Set();
+        let lastSelectedCell = null;
+        let turnCount = 0;
+        let selectedNumbersList = [];
+        let selectedCells = [];
+
+        function closeModalContinue() {
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("gameOverModal").style.display = "none";
+        }
+
+        function closeModalRestart() {
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("gameOverModal").style.display = "none";
+            resetSequence();
+        }
+
+        function copySequence() {
+            const sequenceText = selectedNumbersList.join(" - ");
+            navigator.clipboard.writeText(sequenceText).then(() => {
+                const btn = document.querySelector('.copy-icon-btn');
+                const svg = btn.querySelector('svg');
+                const originalHTML = svg.innerHTML;
+                
+                // Changer en icône de validation
+                svg.innerHTML = '<path d="M20 6L9 17l-5-5"></path>';
+                
+                setTimeout(() => {
+                    svg.innerHTML = originalHTML;
+                }, 2000);
+            }).catch(err => {
+                console.error('Erreur lors de la copie:', err);
+            });
+        }
 
         function toggleModal() {
             const modal = document.getElementById("rankingModal");
@@ -360,7 +508,7 @@
                 if (rankings[count]) {
                     rankings[count].forEach(entry => {
                         let li = document.createElement("li");
-                        li.innerHTML = entry;  // Use innerHTML to include <span> for numbers
+                        li.innerHTML = entry;
                         const scoreMatch = entry.match(/<span>(\d+)<\/span>/);
                         if (scoreMatch) {
                             const score = parseInt(scoreMatch[1], 10);
@@ -379,20 +527,12 @@
             }
         }
 
-        const grid = document.getElementById("grid");
-        const selectedNumbersDisplay = document.getElementById("selectedNumbers");
-        let selectedNumber = null;
-        let availableNumbers = new Set();
-        let lastSelectedCell = null;
-        let turnCount = 0;
-        let selectedNumbersList = [];
-        let selectedCells = [];
-
         function generateGrid() {
             const count = parseInt(document.getElementById("numberCount").value, 10);
             grid.innerHTML = "";
             selectedNumbersDisplay.innerHTML = "";
             selectedNumbersDisplay.style.display = "none";
+            counter.textContent = "0";
             availableNumbers = new Set([...Array(count).keys()].map(i => i + 1));
             selectedNumber = null;
             lastSelectedCell = null;
@@ -440,6 +580,14 @@
                 selectedCells.push(cell);
                 selectedNumbersDisplay.textContent = selectedNumbersList.join(" - ");
                 selectedNumbersDisplay.style.display = "block";
+                counter.textContent = selectedNumbersList.length;
+
+                // Animation lueur du compteur
+                counter.classList.add('glow');
+                setTimeout(() => {
+                    counter.classList.remove('glow');
+                }, 600);
+                
                 checkGameOver();
             }
         }
@@ -454,6 +602,7 @@
                 availableNumbers.add(lastNum);
                 selectedNumber = selectedNumbersList.length > 0 ? selectedNumbersList[selectedNumbersList.length - 1] : null;
                 selectedNumbersDisplay.textContent = selectedNumbersList.join(" - ");
+                counter.textContent = selectedNumbersList.length;
                 if (selectedNumbersList.length === 0) {
                     selectedNumbersDisplay.style.display = "none";
                 }
@@ -468,6 +617,7 @@
             availableNumbers = new Set([...Array(parseInt(document.getElementById("numberCount").value, 10)).keys()].map(i => i + 1));
             selectedNumbersDisplay.textContent = "";
             selectedNumbersDisplay.style.display = "none";
+            counter.textContent = "0";
         }
 
         function checkGameOver() {
@@ -476,18 +626,42 @@
                 if (lastSelectedCell) {
                     lastSelectedCell.classList.add("selected");
                 }
-                // Afficher le score final
                 const finalScore = selectedNumbersList.length;
                 const count = document.getElementById("numberCount").value;
                 const goldScore = goldScores[count];
                 
                 setTimeout(() => {
+                    const modal = document.getElementById("gameOverModal");
+                    const overlay = document.getElementById("overlay");
+                    const modalTitle = document.getElementById("modalTitle");
+                    const modalMessage = document.getElementById("modalMessage");
+                    const modalScore = document.getElementById("modalScore");
+                    const modalSequence = document.getElementById("modalSequence");
+                    
+                    modalSequence.textContent = selectedNumbersList.join(" - ");
+                    
                     if (finalScore >= goldScore) {
-                        alert(`Félicitations ! Vous avez trouvé une séquence de longueur ${finalScore}, la longueur maximale possible !`);
+                        modalTitle.textContent = "Félicitations !";
+                        modalMessage.textContent = "Vous avez trouvé la séquence maximale !";
+                        modalScore.textContent = finalScore;
+                        modalScore.className = "score gold";
                     } else {
-                        alert(`Longueur de votre séquence : ${finalScore}
-                            Longeur maximale possible : ${goldScore}`);
+                        modalTitle.textContent = "Partie terminée !";
+                        modalMessage.textContent = `Longueur maximale possible : ${goldScore}`;
+                        modalScore.textContent = finalScore;
+                        modalScore.className = "score";
                     }
+                    
+                    overlay.style.display = "block";
+                    modal.style.display = "block";
+
+                    // Animation lueur du score après un court délai
+                    setTimeout(() => {
+                        modalScore.classList.add('glow');
+                        setTimeout(() => {
+                            modalScore.classList.remove('glow');
+                        }, 800);
+                    }, 100);
                 }, 200);
             }
         }
