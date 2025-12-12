@@ -357,6 +357,14 @@
             background: rgba(0, 0, 0, 0.7);
             z-index: 1999;
         }
+        .confetti {
+            position: fixed;
+            top: -10px;
+            z-index: 10000;
+            opacity: 1;
+            border-radius: 0px;
+            pointer-events: none;
+        }
     </style>
 
     <!-- Google tag (gtag.js) -->
@@ -751,6 +759,7 @@
                         modalMessage.textContent = "Vous avez trouvé la séquence maximale !";
                         modalScore.textContent = finalScore;
                         modalScore.className = "score gold";
+                        lancerConfettis();
                     } else {
                         modalTitle.textContent = "Partie terminée !";
                         modalMessage.textContent = `Longueur maximale possible : ${goldScore}`;
@@ -770,6 +779,47 @@
                     }, 100);
                 }, 200);
             }
+        }
+
+        function lancerConfettis() {
+            const duration = 2500;
+            const animationEnd = Date.now() + duration;
+
+            (function frame() {
+                const timeLeft = animationEnd - Date.now();
+
+                // Génère 20 confettis par frame
+                for (let i = 0; i < 20; i++) {
+                    const confetti = document.createElement("div");
+                    confetti.className = "confetti";
+
+                    const size = Math.random() * 8 + 4;
+                    const left = Math.random() * 100;
+                    const rotate = Math.random() * 360;
+
+                    confetti.style.width = `${size}px`;
+                    confetti.style.height = `${size * 0.4}px`;
+                    confetti.style.left = `${left}vw`;
+                    confetti.style.transform = `rotate(${rotate}deg)`;
+                    confetti.style.backgroundColor = `hsl(${Math.random()*360}, 70%, 60%)`;
+
+                    document.body.appendChild(confetti);
+
+                    // Animation
+                    const fall = (Math.random() * 1) + 0.5;
+                    confetti.animate([
+                        { transform: `translateY(0) rotate(${rotate}deg)` },
+                        { transform: `translateY(100vh) rotate(${rotate + 180}deg)` }
+                    ], {
+                        duration: fall * 2000,
+                        easing: "linear"
+                    });
+
+                    setTimeout(() => confetti.remove(), fall * 2000);
+                }
+
+                if (timeLeft > 0) requestAnimationFrame(frame);
+            })();
         }
 
         // ---- Gestion de la version et sauvegarde ----
