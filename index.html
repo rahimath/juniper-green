@@ -367,214 +367,6 @@
             border-radius: 0px;
             pointer-events: none;
         }
-
-        /* Classement Global */
-        .global-ranking-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-        .global-ranking-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-        }
-
-        .global-ranking-modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #171717;
-            border-radius: 20px;
-            z-index: 2100;
-            width: 90%;
-            max-width: 900px;
-            max-height: 85vh;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-        }
-
-        .global-ranking-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 25px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .global-ranking-header h2 {
-            margin: 0;
-            font-size: 28px;
-            color: white;
-        }
-
-        .global-ranking-close {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s ease;
-        }
-
-        .global-ranking-close:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .global-ranking-content {
-            padding: 20px 30px;
-            max-height: calc(85vh - 100px);
-            overflow-y: auto;
-        }
-
-        .global-ranking-loading {
-            text-align: center;
-            padding: 40px;
-            color: #ccc;
-        }
-
-        .global-ranking-loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #333;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .global-ranking-item {
-            background: #222;
-            border-radius: 12px;
-            padding: 15px 20px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: background 0.2s ease;
-        }
-
-        .global-ranking-item:hover {
-            background: #2a2a2a;
-        }
-
-        .global-ranking-item.rank-1 {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0.05) 100%);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-        }
-
-        .global-ranking-item.rank-2 {
-            background: linear-gradient(135deg, rgba(192, 192, 192, 0.15) 0%, rgba(192, 192, 192, 0.05) 100%);
-            border: 2px solid rgba(192, 192, 192, 0.3);
-        }
-
-        .global-ranking-item.rank-3 {
-            background: linear-gradient(135deg, rgba(205, 127, 50, 0.15) 0%, rgba(205, 127, 50, 0.05) 100%);
-            border: 2px solid rgba(205, 127, 50, 0.3);
-        }
-
-        .global-ranking-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex: 1;
-        }
-
-        .global-ranking-position {
-            font-size: 24px;
-            font-weight: 700;
-            color: #888;
-            min-width: 40px;
-        }
-
-        .global-ranking-item.rank-1 .global-ranking-position {
-            color: #FFD700;
-        }
-
-        .global-ranking-item.rank-2 .global-ranking-position {
-            color: #C0C0C0;
-        }
-
-        .global-ranking-item.rank-3 .global-ranking-position {
-            color: #CD7F32;
-        }
-
-        .global-ranking-info {
-            flex: 1;
-        }
-
-        .global-ranking-name {
-            font-size: 18px;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 3px;
-        }
-
-        .global-ranking-class {
-            font-size: 14px;
-            color: #888;
-        }
-
-        .global-ranking-score {
-            font-size: 28px;
-            font-weight: 700;
-            color: #667eea;
-        }
-
-        .global-ranking-stats {
-            background: #222;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-        }
-
-        .global-ranking-stat {
-            text-align: center;
-        }
-
-        .global-ranking-stat-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: #667eea;
-            margin-bottom: 5px;
-        }
-
-        .global-ranking-stat-label {
-            font-size: 14px;
-            color: #888;
-        }
-
-        .global-ranking-error {
-            text-align: center;
-            padding: 40px;
-            color: #ff6b6b;
-        }
     </style>
 
     <!-- Google tag (gtag.js) -->
@@ -650,24 +442,6 @@
         </div>
     </div>
 
-    <button class="global-ranking-btn" onclick="openGlobalRanking()">🏆 Classement Global</button>
-
-    <div class="overlay" id="globalRankingOverlay" onclick="closeGlobalRanking()"></div>
-    <div class="global-ranking-modal" id="globalRankingModal">
-        <div class="global-ranking-header">
-            <h2>🏆 Classement Global</h2>
-            <button class="global-ranking-close" onclick="closeGlobalRanking()">×</button>
-        </div>
-        <div class="global-ranking-content" id="globalRankingContent">
-            <div class="global-ranking-loading">
-                <div class="global-ranking-loading-spinner"></div>
-                <p>Chargement des données...</p>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-
     <script>
         const rankings = {
             "100": [
@@ -693,9 +467,8 @@
                 "1. Roudaïna (5B) <span>41</span>",
                 "2. Ayyoub (5e5) <span>34</span>",
                 "3. Emmanuel (5E) <span>26</span>",
-                "4. Naelle (5B) <span>23</span>",
-                "5. Ayyoub (5e5) <span>21</span>",
-                "5. Madhi (5E) <span>21</span>"
+                "4. Madhi (5E) <span>25</span>",
+                "5. Naelle (5B) <span>23</span>"
             ],
             "40": [
                 "<span>Classement 5èmes</span>",
@@ -721,13 +494,12 @@
                 "11. Jarod (5F) & Cristian (5D) <span>20</span>",
                 "13. Mathis (5D) <span>19</span>",
                 "13. Madhi (5E) <span>19</span>",
-                "13. Ayyoub (5e5) <span>19</span>",
                 "13. Kahina (5B) <span>19</span>",
-                "17. Yahya (5B) <span>18</span>",
-                "17. Emmanuel (5E) <span>18</span>",
-                "19. Mme Butin <span>17</span>",
-                "20. Madjid (5B) <span>16</span>",
-                "21. Jayram (5F) <span>15</span>"
+                "16. Yahya (5B) <span>18</span>",
+                "16. Emmanuel (5E) <span>18</span>",
+                "18. Mme Butin <span>17</span>",
+                "19. Madjid (5B) <span>16</span>",
+                "20. Jayram (5F) <span>15</span>"
             ],
             "25": [
                 "<span>Classement 5èmes</span>",
@@ -735,8 +507,9 @@
                 "1. Lily-Rose (5E) <span>21</span>",
                 "1. Rafael (5A) <span>21</span>",
                 "4. Ayyoub (5e5) <span>20</span>",
-                "5. Madhi (5E) <span>18</span>",
-                "6. Jarod (5F) <span>16</span>"
+                "4. Noa (5e5) <span>20</span>",
+                "6. Madhi (5E) <span>18</span>",
+                "7. Jarod (5F) <span>16</span>"
             ],
             "20": [
                 "<span>Classement 5èmes</span>",
@@ -746,18 +519,19 @@
                 "1. Noa (5e5) <span>17</span>",
                 "1. Ayyoub (5e5) <span>17</span>",
                 "1. Rafael (5A) <span>17</span>",
-                "7. Manon & Ange-Emmanuella (5e5) <span>16</span>",
-                "7. Issa (5e5) <span>16</span>",
-                "7. Jahid (5e5) <span>16</span>",
-                "7. Maëllys & Elena (5E) <span>16</span>",
-                "7. Neema (5A) <span>16</span>",
-                "7. Kahina (5B) <span>16</span>",
-                "7. Jarod (5F) <span>16</span>",
-                "14. Jayram (5F) <span>15</span>",
-                "14. Elios (5F) <span>15</span>",
-                "16. Yahya (5B) <span>13</span>",
-                "16. Emmanuel (5E) <span>13</span>",
-                "18. Madhi (5E) <span>12</span>"
+                "1. Naila (5e5) <span>17</span>",
+                "8. Manon & Ange-Emmanuella (5e5) <span>16</span>",
+                "8. Issa (5e5) <span>16</span>",
+                "8. Jahid (5e5) <span>16</span>",
+                "8. Maëllys & Elena (5E) <span>16</span>",
+                "8. Neema (5A) <span>16</span>",
+                "8. Kahina (5B) <span>16</span>",
+                "8. Jarod (5F) <span>16</span>",
+                "8. Elios (5F) <span>16</span>",
+                "16. Jayram (5F) <span>15</span>",
+                "17. Yahya (5B) <span>13</span>",
+                "17. Emmanuel (5E) <span>13</span>",
+                "19. Madhi (5E) <span>12</span>"
             ],
             "10": [
                 "<span>Classement 5èmes</span>",
@@ -787,7 +561,8 @@
                 "1. Rafael (5A) <span>9</span>",
                 "1. Manon & Ange-Emmanuella (5e5) <span>9</span>",
                 "1. Raphaël (5B) <span>9</span>",
-                "1. Thomas (5D) <span>9</span>"
+                "1. Thomas (5D) <span>9</span>",
+                "1. Naila (5e5) <span>9</span>"
             ]
         };
 
@@ -1057,120 +832,6 @@
                 if (timeLeft > 0) requestAnimationFrame(frame);
             })();
         }
-
-
-        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT1neNKra59CewHg8kRJvnUNNiGW5_pat_SZF4_5xmhgpxn1st0A-Sk9mIUXu5YpRFVKcgf-E7eT47H/pub?gid=1245136924&single=true&output=csv';
-
-        const difficultyWeights = {
-            "10": 0.9, "20": 1.7, "25": 2.1, "30": 2.6, "40": 3.2,
-            "50": 4.1, "60": 4.9, "80": 6.4, "100": 7.7
-        };
-
-        function exponentialScore(linearPercentage) {
-            const x = linearPercentage / 100;
-            const k = 2.5;
-            return ((Math.exp(k * x) - 1) / (Math.exp(k) - 1)) * 100;
-        }
-
-        async function openGlobalRanking() {
-            const modal = document.getElementById('globalRankingModal');
-            const overlay = document.getElementById('globalRankingOverlay');
-            const content = document.getElementById('globalRankingContent');
-            
-            modal.style.display = 'block';
-            overlay.style.display = 'block';
-            
-            content.innerHTML = '<div class="global-ranking-loading"><div class="global-ranking-loading-spinner"></div><p>Chargement des données...</p></div>';
-            
-            try {
-                const response = await fetch(CSV_URL);
-                if (!response.ok) throw new Error('Erreur de chargement');
-                
-                const text = await response.text();
-                const parsed = Papa.parse(text, {
-                    header: true,
-                    skipEmptyLines: true,
-                    dynamicTyping: false
-                });
-
-                const studentsData = [];
-                
-                parsed.data.forEach(row => {
-                    const name = row['Nom'] || row['nom'];
-                    const classe = row['Classe'] || row['classe'] || '';
-                    const totalPoints = parseFloat(row['Exp'] || row['exp'] || 0);
-                    
-                    if (name && name.trim() !== '' && totalPoints > 0) {
-                        studentsData.push({
-                            name: name.trim(),
-                            class: classe.trim() || 'Prof',
-                            totalPoints: totalPoints
-                        });
-                    }
-                });
-
-                studentsData.sort((a, b) => b.totalPoints - a.totalPoints);
-                displayGlobalRanking(studentsData);
-            } catch (error) {
-                console.error('Erreur:', error);
-                content.innerHTML = '<div class="global-ranking-error"><p>❌ Impossible de charger le classement</p><p style="font-size: 14px; color: #888;">' + error.message + '</p></div>';
-            }
-        }
-
-        function displayGlobalRanking(students) {
-            const content = document.getElementById('globalRankingContent');
-            
-            if (!students.length) {
-                content.innerHTML = '<div class="global-ranking-error"><p>Aucun participant trouvé</p></div>';
-                return;
-            }
-            
-            const totalPoints = students.reduce((sum, s) => sum + s.totalPoints, 0);
-            const avgPoints = (totalPoints / students.length).toFixed(1);
-            
-            let html = `
-                <div class="global-ranking-stats">
-                    <div class="global-ranking-stat">
-                        <div class="global-ranking-stat-value">${students.length}</div>
-                        <div class="global-ranking-stat-label">Participants</div>
-                    </div>
-                    <div class="global-ranking-stat">
-                        <div class="global-ranking-stat-value">${students[0].totalPoints.toFixed(1)}</div>
-                        <div class="global-ranking-stat-label">Meilleur score</div>
-                    </div>
-                    <div class="global-ranking-stat">
-                        <div class="global-ranking-stat-value">${avgPoints}</div>
-                        <div class="global-ranking-stat-label">Moyenne</div>
-                    </div>
-                </div>
-            `;
-            
-            students.forEach((student, index) => {
-                const rankClass = index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : '';
-                const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '';
-                
-                html += `
-                    <div class="global-ranking-item ${rankClass}">
-                        <div class="global-ranking-left">
-                            <div class="global-ranking-position">${medal || (index + 1)}</div>
-                            <div class="global-ranking-info">
-                                <div class="global-ranking-name">${student.name}</div>
-                                <div class="global-ranking-class">${student.class === 'Prof' ? 'Professeur' : 'Classe ' + student.class}</div>
-                            </div>
-                        </div>
-                        <div class="global-ranking-score">${student.totalPoints.toFixed(1)}</div>
-                    </div>
-                `;
-            });
-            
-            content.innerHTML = html;
-        }
-
-        function closeGlobalRanking() {
-            document.getElementById('globalRankingModal').style.display = 'none';
-            document.getElementById('globalRankingOverlay').style.display = 'none';
-        }
-
 
         // ---- Gestion de la version et sauvegarde ----
         window.addEventListener("DOMContentLoaded", () => {
