@@ -367,37 +367,6 @@
             border-radius: 0px;
             pointer-events: none;
         }
-        /* Nouveau style pour le bouton de classement global */
-        .global-ranking-btn {
-            position: absolute;
-            bottom: 20px; /* Position en bas */
-            right: 20px; /* Position à droite */
-            background-color: #D4AF37; /* Couleur or */
-            color: #171717;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-            transition: background-color 0.2s ease, box-shadow 0.2s ease;
-        }
-        .global-ranking-btn:hover {
-            background-color: #EBC144;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
-        }
-        /* Style pour positionner le modal Global à droite */
-        #globalRankingModal {
-            left: initial !important; 
-            right: 20px;
-            width: 350px; /* Peut-être un peu plus large pour le global */
-        }
-        #globalRankingModal h3 {
-            margin-bottom: 15px;
-            text-align: center;
-            color: #D4AF37;
-        }
     </style>
 
     <!-- Google tag (gtag.js) -->
@@ -471,13 +440,6 @@
             <button onclick="closeModalContinue()">Continuer</button>
             <button onclick="closeModalRestart()">Recommencer</button>
         </div>
-    </div>
-
-    <button class="global-ranking-btn" onclick="toggleGlobalModal()">🏆 Global</button>
-
-    <div id="globalRankingModal" class="modal" style="top: 50%; transform: translateY(-50%); left: initial; right: 20px;">
-        <h3>🏆 Classement Global (Cumulé)</h3>
-        <ul id="globalRankingList"></ul>
     </div>
 
     <script>
@@ -619,13 +581,6 @@
             "100": 77
         };
 
-        const GLOBAL_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT1neNKra59CewHg8kRJvnUNNiGW5_pat_SZF4_5xmhgpxn1st0A-Sk9mIUXu5YpRFVKcgf-E7eT47H/pub?gid=1245136924&single=true&output=csv';
-        let globalRankingData = [];
-
-        const NAME_INDEX = 0; 
-        const CLASS_INDEX = 1;
-        const SCORE_INDEX = 15;
-
         const grid = document.getElementById("grid");
         const selectedNumbersDisplay = document.getElementById("selectedNumbers");
         const counter = document.getElementById("counter");
@@ -694,73 +649,6 @@
                 }
                 modal.style.display = "block";
             }
-        }
-
-        function toggleGlobalModal() {
-            const modal = document.getElementById("globalRankingModal");
-            const rankingList = document.getElementById("globalRankingList");
-
-            if (modal.style.display === "block") {
-                modal.style.display = "none";
-            } else {
-                rankingList.innerHTML = "";
-                
-                // Remplir la liste avec les éléments <li> que nous avons stockés
-                // Nous clonons les nœuds car une <li> ne peut exister qu'à un seul endroit dans le DOM
-                globalRankingData.forEach(li => rankingList.appendChild(li.cloneNode(true)));
-                
-                modal.style.display = "block";
-                // S'assurer que le modal du classement par version est fermé
-                document.getElementById("rankingModal").style.display = "none";
-            }
-        }
-
-        // Nouvelle fonction pour analyser le CSV global
-        function parseGlobalCSV(csv) {
-            const lines = csv.split('\n').filter(line => line.trim() !== '').slice(1); // Enlever les lignes vides et l'en-tête (ligne 1)
-            const list = [];
-            
-            lines.forEach((line, index) => {
-                // Utiliser une expression régulière pour gérer les séparateurs à l'intérieur des guillemets
-                const parts = line.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || line.split(',');
-                
-                if (parts.length > SCORE_INDEX) {
-                    const nom = parts[NAME_INDEX].trim().replace(/"/g, '');
-                    const classe = parts[CLASS_INDEX].trim().replace(/"/g, '');
-                    const score = parseInt(parts[SCORE_INDEX].trim(), 10);
-                    
-                    if (nom && !isNaN(score)) {
-                        // Rang = index + 1 (puisque le sheet est classé)
-                        let li = document.createElement("li");
-                        // Format : Rang. Nom (Classe) <span>Score</span>
-                        li.innerHTML = `${index + 1}. ${nom} (${classe}) <span>${score}</span>`;
-                        
-                        // Mettre en évidence le Top 3 en or
-                        if (index < 3) {
-                            li.classList.add('gold-score');
-                        }
-                        list.push(li);
-                    }
-                }
-            });
-            return list;
-        }
-
-        // Modification de loadRankings pour inclure le classement global
-        async function loadRankings() {
-            // Chargement du classement global
-            try {
-                const response = await fetch(GLOBAL_CSV_URL);
-                const csvText = await response.text();
-                globalRankingData = parseGlobalCSV(csvText); 
-            } catch (error) {
-                console.error("Erreur de chargement du classement global :", error);
-                let li = document.createElement("li");
-                li.textContent = "Erreur de chargement du classement. Veuillez réessayer.";
-                globalRankingData = [li];
-            }
-            // Le reste de votre logique de démarrage peut rester ici si besoin (ex: generateGrid())
-            generateGrid();
         }
 
         function generateGrid() {
@@ -953,7 +841,7 @@
             const savedVersion = localStorage.getItem("gameVersion");
             if (savedVersion && select) select.value = savedVersion;
 
-            loadRankings();
+            generateGrid();
 
             select.addEventListener("change", (e) => {
                 const version = e.target.value;
