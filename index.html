@@ -358,6 +358,7 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
             z-index: 1999;
+            backdrop-filter: blur(2px); /* Optionnel : léger flou derrière */
         }
         .confetti {
             position: fixed;
@@ -367,10 +368,206 @@
             border-radius: 0px;
             pointer-events: none;
         }
+        /* Nouveau style pour le bouton de classement global */
+        .global-ranking-btn {
+            position: absolute;
+            bottom: 30px; /* Position en bas */
+            right: 20px; /* Position à droite */
+            background-color: #171717; /* Couleur or */
+            color: #ffffff;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: normal;
+            cursor: pointer;
+            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            transition: background-color 0.2s ease, box-shadow 0.2s ease; */
+        }
+        .global-ranking-btn:hover {
+            /* background-color: #EBC144;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); */
+        }
+        /* Centrage du modal global et style amélioré */
+        #globalRankingModal {
+            display: none;
+            position: fixed; 
+            top: 50% !important; 
+            left: 50% !important; 
+            transform: translate(-50%, -50%) !important; 
+            width: 90% !important; /* Pourcentage de la largeur */
+            max-width: 800px; 
+            height: 75% !important; /* Pourcentage de la hauteur */
+            background: #171717;
+            padding: 20px;
+            border-radius: 20px;
+            z-index: 2000; 
+            overflow-y: auto; 
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        #globalRankingModal h3 {
+            font-size: 26px;
+            margin-top: 10px;
+            margin-bottom: 35px;
+            /* text-shadow: 0 0 5px rgba(212, 175, 55, 0.5); */
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #globalRankingModal ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* Espace entre les entrées */
+        }
+
+        /* --- NOUVEAU STYLE POUR LA CROIX SVG --- */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 2001;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .close-btn svg {
+            width: 32px;
+            height: 32px;
+            stroke: #fff;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+        }
+
+        /* Réduction de l'espace (gap) entre les lignes du classement */
+        #globalRankingList {
+            display: flex;
+            flex-direction: column;
+            gap: 6px; /* Espace réduit entre les cadres (auparavant 12px) */
+            list-style: none;
+            padding: 6px;
+        }
+
+        /* Style de chaque entrée du classement */
+        .ranking-entry {
+            display: flex !important;
+            justify-content: flex-start !important; /* Alignement à gauche */
+            align-items: center;
+            background-color: #2b2b2b;
+            padding: 9px;
+            border-radius: 12px;
+            margin-bottom: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .ranking-entry .rank-badge { font-size: 18px; min-width: 40px; }
+        .ranking-entry .rank-name { font-size: 18px; }
+        .ranking-entry .rank-class { font-size: 13px; font-weight: 500; }
+        .ranking-entry .score-value { font-size: 18px; color: #ffffff; }
+
+        /* Podium (2ème et 3ème) */
+        .ranking-entry:nth-child(2),
+        .ranking-entry:nth-child(3) {
+            padding: 14px;
+        }
+        .ranking-entry:nth-child(2) .rank-badge, 
+        .ranking-entry:nth-child(3) .rank-badge { font-size: 22px; }
+        .ranking-entry:nth-child(2) .rank-name, 
+        .ranking-entry:nth-child(3) .rank-name { font-size: 22px; }
+        .ranking-entry:nth-child(2) .rank-class, 
+        .ranking-entry:nth-child(3) .rank-class { font-size: 15px; }
+        .ranking-entry:nth-child(2) .score-value, 
+        .ranking-entry:nth-child(3) .score-value { font-size: 26px; color: #69F0AE; }
+
+        /* Le Premier */
+        .ranking-entry:nth-child(1) {
+            padding: 20px;
+            background-color: #332e1c;
+            border: 1px solid #D4AF37;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        .ranking-entry:nth-child(1) .rank-badge { font-size: 26px; color: #D4AF37 !important; }
+        .ranking-entry:nth-child(1) .rank-name { font-size: 26px; color: #D4AF37 !important; }
+        .ranking-entry:nth-child(1) .rank-class { font-size: 18px; color: #D4AF37 !important; opacity: 0.8; }
+        .ranking-entry:nth-child(1) .score-value { font-size: 32px; color: #D4AF37 !important; }
+
+        .ranking-entry:hover {
+            background-color: #333;
+            transform: translateY(-2px);
+        }
+
+        .rank-badge {
+            font-size: 26px;
+            font-weight: bold;
+            min-width: 50px;
+            text-align: center;
+            color: #ccc;
+        }
+
+        .info-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-grow: 1;
+            margin-left: 10px;
+        }
+
+        .name-class {
+            display: flex;
+            align-items: center;
+            text-align: left !important;
+            flex-grow: 1;
+        }
+
+        .rank-name {
+            font-weight: 600;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .rank-class {
+            font-weight: normal; /* Toujours normal */
+            color: #999;
+            margin-left: 0px; /* Espace entre le nom et la parenthèse */
+        }
+
+        .rank-score {
+            text-align: right;
+            min-width: 80px; /* Assure que les scores sont alignés verticalement */
+            margin-left: 25px;
+        }
+
+        .score-value {
+            font-size: 26px;
+            font-weight: 700;
+            color: #69F0AE;
+        }
+
+        .score-unit {
+            font-size: 12px;
+            color: #999;
+            font-weight: 500 !important;
+            font-style: italic;
+            display: block;
+        }
+
     </style>
 
-    <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3N5SVBSN6Q"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3N5SVBSN6Q"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -421,6 +618,7 @@
     <div class="selected-numbers" id="selectedNumbers"></div>
     
     <div class="overlay" id="overlay"></div>
+
     <div class="game-over-modal" id="gameOverModal">
         <h2 id="modalTitle">Partie terminée !</h2>
         <p id="modalMessage"></p>
@@ -440,6 +638,18 @@
             <button onclick="closeModalContinue()">Continuer</button>
             <button onclick="closeModalRestart()">Recommencer</button>
         </div>
+    </div>
+
+    <button class="global-ranking-btn" onclick="toggleGlobalModal()">Classement global</button>
+
+    <div id="globalRankingModal" class="modal" style="top: 50%; transform: translateY(-50%); left: 50%;"> 
+        <button class="close-btn" onclick="toggleGlobalModal()">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18M6 6L18 18" />
+            </svg>
+        </button>
+        <h3>Classement actuel</h3>
+        <ul id="globalRankingList"></ul>
     </div>
 
     <script>
@@ -466,9 +676,8 @@
             ],
             "60": [
                 "<span>Classement 5èmes</span>",
-                "1. Lily-Rose (5E) <span>36</span>",
-                "2. Naelle (5B) <span>27</span>",
-                "3. Madhi (5E) <span>24</span>"
+                "1. Naelle (5B) <span>27</span>",
+                "2. Madhi (5E) <span>24</span>"
             ],
             "50": [
                 "<span>Classement 5èmes</span>",
@@ -518,8 +727,8 @@
                 "1. Rafael (5A) <span>21</span>",
                 "4. Ayyoub (5e5) <span>20</span>",
                 "4. Noa (5e5) <span>20</span>",
-                "4. Jarod (5F) <span>20</span>",
-                "7. Madhi (5E) <span>18</span>",
+                "6. Madhi (5E) <span>18</span>",
+                "7. Jarod (5F) <span>16</span>",
                 "8. Mehdi (5A) <span>13</span>"
             ],
             "20": [
@@ -531,7 +740,7 @@
                 "1. Ayyoub (5e5) <span>17</span>",
                 "1. Rafael (5A) <span>17</span>",
                 "1. Naila (5e5) <span>17</span>",
-                "1. Jarod (5F) <span>17</span>",
+                "1. Jarod (5F) <span>16</span>",
                 "9. Manon & Ange-Emmanuella (5e5) <span>16</span>",
                 "9. Issa (5e5) <span>16</span>",
                 "9. Jahid (5e5) <span>16</span>",
@@ -593,6 +802,19 @@
             "100": 77
         };
 
+        // --- CLASSEMENT GLOBAL (Définitions) ---
+        const GLOBAL_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT1neNKra59CewHg8kRJvnUNNiGW5_pat_SZF4_5xmhgpxn1st0A-Sk9mIUXu5YpRFVKcgf-E7eT47H/pub?gid=1245136924&single=true&output=csv';
+        let globalRankingData = [];
+
+        // Indices des colonnes (A=0, B=1)
+        const NAME_INDEX = 0; 
+        const CLASS_INDEX = 1;
+        const CUMULATIVE_SCORE_INDEX = 15;
+
+        // REGEX pour extraire la colonne 15 :
+        const COLUMN_15_REGEX = /^(?:(?:"[^"]*"|[^,]*),){15}("[^"]*"|[^,]*)/;
+
+
         const grid = document.getElementById("grid");
         const selectedNumbersDisplay = document.getElementById("selectedNumbers");
         const counter = document.getElementById("counter");
@@ -612,6 +834,13 @@
             document.getElementById("overlay").style.display = "none";
             document.getElementById("gameOverModal").style.display = "none";
             resetSequence();
+        }
+
+        function closeAllModals() {
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("globalRankingModal").style.display = "none";
+            document.getElementById("rankingModal").style.display = "none";
+            document.getElementById("gameOverModal").style.display = "none";
         }
 
         function copySequence() {
@@ -661,6 +890,136 @@
                 }
                 modal.style.display = "block";
             }
+        }
+
+        function toggleGlobalModal() {
+            const modal = document.getElementById("globalRankingModal");
+            const overlay = document.getElementById("overlay");
+            const rankingList = document.getElementById("globalRankingList");
+
+            if (modal.style.display === "block") {
+                closeAllModals(); 
+            } else {
+                document.getElementById("rankingModal").style.display = "none";
+                document.getElementById("gameOverModal").style.display = "none";
+
+                rankingList.innerHTML = "";
+                
+                globalRankingData.forEach(li => rankingList.appendChild(li.cloneNode(true)));
+                
+                modal.style.display = "block";
+                overlay.style.display = "block"; // Affiche l'overlay pour bloquer le jeu
+            }
+        }
+
+        function parseGlobalCSV(csv) {
+            const lines = csv.split('\n').filter(line => line.trim() !== '');
+            const dataLines = lines.slice(1); 
+            const extractedData = [];
+            
+            dataLines.forEach((line, index) => {
+                const parts = line.split(',');
+                
+                const nom = parts[NAME_INDEX] ? parts[NAME_INDEX].trim().replace(/"/g, '') : '';
+                let classe = parts[CLASS_INDEX] ? parts[CLASS_INDEX].trim().replace(/"/g, '') : '';
+                
+                if (classe === '') {
+                    classe = 'Professeur'; 
+                }
+
+                // --- NOUVEAU TRAITEMENT POUR LA COLONNE DE SCORE (INDEX 15 / COLONNE P) ---
+                let scoreTextRaw = '';
+                const match = line.match(COLUMN_15_REGEX);
+                
+                if (match && match[1]) {
+                    scoreTextRaw = match[1].trim();
+                } else {
+                    scoreTextRaw = parts[CUMULATIVE_SCORE_INDEX] || '';
+                }
+
+                // 1. Enlève tous les guillemets.
+                let scoreTextClean = scoreTextRaw.replace(/"/g, '').trim();
+                
+                // 2. Protège la virgule décimale en la remplaçant par un jeton temporaire.
+                scoreTextClean = scoreTextClean.replace(',', 'DECIMAL_POINT_PLACEHOLDER');
+                
+                // 3. Supprime tous les points et espaces (séparateurs de milliers potentiels : 1.030 ou 1 030).
+                scoreTextClean = scoreTextClean.replace(/\./g, ''); 
+                scoreTextClean = scoreTextClean.replace(/\s/g, ''); 
+                
+                // 4. Rétablit le point décimal pour que parseFloat fonctionne.
+                scoreTextClean = scoreTextClean.replace('DECIMAL_POINT_PLACEHOLDER', '.');
+                
+                const score = parseFloat(scoreTextClean); 
+                
+                // Décommentez la ligne ci-dessous si le problème persiste pour voir le résultat du parsing :
+                // console.log(`DEBUG Ligne ${index + 1}: Nom='${nom}'. Raw: '${scoreTextRaw}'. Clean: '${scoreTextClean}'. Parsé: ${score}.`);
+                
+                if (nom && !isNaN(score) && score !== 0) { // On ignore les scores à 0
+                    extractedData.push({ nom, classe, score });
+                }
+            });
+            
+            // 1. Triage des données : (le plus haut score est 1er)
+            extractedData.sort((a, b) => b.score - a.score);
+
+            // 2. Construction des éléments HTML (li)
+            const list = [];
+            extractedData.forEach((data, index) => {
+                const rang = index + 1;
+                const badge = rang;
+                
+                const scoreValue = data.score;
+                // AFFICHAGE : Affiche un chiffre après la virgule si nécessaire, sinon affiche l'entier.
+                const scoreDisplay = scoreValue % 1 === 0 ? scoreValue.toFixed(0) : scoreValue.toFixed(1); 
+
+                let li = document.createElement("li");
+                li.classList.add('ranking-entry');
+                li.setAttribute('data-rank', rang);
+                
+                li.innerHTML = `
+                    <div class="rank-badge">${rang}</div>
+                    <div class="info-group">
+                        <div class="name-class">
+                            <span class="rank-name">${data.nom} <span class="rank-class">${data.classe}</span></span>
+                        </div>
+                        <div class="rank-score">
+                            <span class="score-value">${scoreDisplay}</span>
+                            <span class="score-unit">points</span>
+                        </div>
+                    </div>
+                `;
+                if (rang <= 3) {
+                    li.classList.add('top-three');
+                }
+                if (data.classe === 'Professeur') {
+                    li.classList.add('teacher-entry');
+                }
+
+                list.push(li);
+            });
+
+            return list;
+        }
+
+        async function loadRankings() {
+            try {
+                const response = await fetch(GLOBAL_CSV_URL);
+                
+                if (!response.ok) {
+                     throw new Error(`Erreur HTTP lors du chargement: ${response.status}`);
+                }
+                
+                const csvText = await response.text();
+                globalRankingData = parseGlobalCSV(csvText); 
+                
+            } catch (error) {
+                console.error("Erreur critique de chargement/parsing du classement global :", error);
+                let li = document.createElement("li");
+                li.textContent = "Erreur de chargement du classement. (Vérifiez la publication Sheets)";
+                globalRankingData = [li];
+            }
+            generateGrid();
         }
 
         function generateGrid() {
@@ -720,7 +1079,6 @@
                 selectedNumbersDisplay.style.display = "block";
                 counter.textContent = selectedNumbersList.length;
 
-                // Animation lueur du compteur
                 counter.classList.add('glow');
                 setTimeout(() => {
                     counter.classList.remove('glow');
@@ -737,8 +1095,8 @@
                 if (lastCell) {
                     lastCell.classList.remove("selected", "disabled");
                 }
-                availableNumbers.add(lastNum);
                 selectedNumber = selectedNumbersList.length > 0 ? selectedNumbersList[selectedNumbersList.length - 1] : null;
+                availableNumbers.add(lastNum);
                 selectedNumbersDisplay.textContent = selectedNumbersList.join(" - ");
                 counter.textContent = selectedNumbersList.length;
                 if (selectedNumbersList.length === 0) {
@@ -794,7 +1152,6 @@
                     overlay.style.display = "block";
                     modal.style.display = "block";
 
-                    // Animation lueur du score après un court délai
                     setTimeout(() => {
                         modalScore.classList.add('glow');
                         setTimeout(() => {
@@ -812,7 +1169,6 @@
             (function frame() {
                 const timeLeft = animationEnd - Date.now();
 
-                // Génère 20 confettis par frame
                 for (let i = 0; i < 20; i++) {
                     const confetti = document.createElement("div");
                     confetti.className = "confetti";
@@ -829,7 +1185,6 @@
 
                     document.body.appendChild(confetti);
 
-                    // Animation
                     const fall = (Math.random() * 1) + 0.5;
                     confetti.animate([
                         { transform: `translateY(0) rotate(${rotate}deg)` },
@@ -846,15 +1201,23 @@
             })();
         }
 
-        // ---- Gestion de la version et sauvegarde ----
         window.addEventListener("DOMContentLoaded", () => {
             const select = document.getElementById("numberCount");
+            const overlay = document.getElementById("overlay");
             
             const savedVersion = localStorage.getItem("gameVersion");
             if (savedVersion && select) select.value = savedVersion;
 
-            generateGrid();
-
+            // Ferme tout quand on clique sur l'ombre derrière le classement
+            overlay.addEventListener('click', () => {
+                const globalModal = document.getElementById("globalRankingModal");
+                if (globalModal.style.display === "block") {
+                    closeAllModals(); 
+                }
+            });
+            
+            loadRankings(); 
+            
             select.addEventListener("change", (e) => {
                 const version = e.target.value;
                 localStorage.setItem("gameVersion", version);
